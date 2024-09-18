@@ -51,7 +51,9 @@ public class Player : MonoBehaviour
         {
             velocity += acceleration * Vector3.right * Time.deltaTime;
         }
-        if()
+        
         
     }
+
+
 }
