@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private float speed = 0.01f;
 
-    //The amount of time it will take to reach the target speed
-    private float timeToReachSpeed = 3f;
     //The speed that we want the character to reach after a certain amount of time
     private float targetSpeed = 2f;
 
@@ -23,33 +21,75 @@ public class Player : MonoBehaviour
 
     public float maxSpeed;
     private float accelerationTime = 3f;
+    private bool accelerate;
 
     private void Start()
     {
-        acceleration = targetSpeed / timeToReachSpeed;
+        acceleration = targetSpeed / accelerationTime;
     }
 
     void Update()
     {
         //velocity += speed * transform.up * Time.deltaTime;
-        transform.position += velocity.normalized * speed *Time.deltaTime;
         PlayerMovement();
+        // transform.position += velocity.normalized * speed *Time.deltaTime;
+        Debug.Log(speed);
     }
 
     void PlayerMovement()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            velocity += acceleration * Vector3.up * Time.deltaTime;
-        } else if (Input.GetKey(KeyCode.DownArrow))
+            accelerate = true;
+            velocity += speed * Vector3.up * Time.deltaTime;
+        }else if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            velocity += acceleration * Vector3.down * Time.deltaTime;
-        } else if (Input.GetKey(KeyCode.LeftArrow))
+            accelerate = false;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
         {
-            velocity += acceleration * Vector3.left * Time.deltaTime;
-        } else if (Input.GetKey(KeyCode.RightArrow))
+            accelerate = true;
+            velocity += speed * Vector3.down * Time.deltaTime;
+        }
+        else if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            velocity += acceleration * Vector3.right * Time.deltaTime;
+            accelerate = false;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            accelerate = true;
+            velocity += speed * Vector3.left * Time.deltaTime;
+        }
+        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            accelerate = false;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            accelerate = true;
+            velocity += speed * Vector3.right * Time.deltaTime;
+        }
+        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            accelerate = false;
+        }
+        if (accelerate == true)
+        {
+            speed += acceleration * Time.deltaTime;
+            transform.position += velocity.normalized * speed * Time.deltaTime;
+        }
+        else
+        {
+            speed -= acceleration * Time.deltaTime;
+            if (speed < 0)
+            {
+                speed = 0;
+            }
+        }
+        
+        if (speed > maxSpeed)
+        {
+            speed = maxSpeed;
         }
         
         

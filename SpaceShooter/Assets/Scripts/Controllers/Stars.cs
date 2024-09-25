@@ -8,7 +8,7 @@ public class Stars : MonoBehaviour
     public float drawingTime;
 
     // Update is called once per frame
-    void Update()
+   /* void Update()
     {
         DrawConstellation(starTransforms);
     }
@@ -19,5 +19,5 @@ public class Stars : MonoBehaviour
         {
             Debug.DrawLine(stars[i].position, stars[i+1].position, Color.white);
         }
-    }
+    }*/
 }
