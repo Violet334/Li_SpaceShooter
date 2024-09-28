@@ -6,18 +6,28 @@ public class Stars : MonoBehaviour
 {
     public List<Transform> starTransforms;
     public float drawingTime;
-
+    int i = 1;
+    float timePassed = 0;
+    float linePercent;
     // Update is called once per frame
-   /* void Update()
+   void Update()
     {
-        DrawConstellation(starTransforms);
+        DrawConstellation();
     }
 
-    void DrawConstellation(List<Transform> stars)
+    void DrawConstellation()
     {
-        for(int i = 0; i < stars.Count; i++)
+        timePassed += Time.deltaTime;
+        linePercent = timePassed / drawingTime;
+        if (timePassed >= drawingTime)
         {
-            Debug.DrawLine(stars[i].position, stars[i+1].position, Color.white);
+            i++;
+            timePassed = 0;
+            if (i >= starTransforms.Count)
+            {
+                i = 1;
+            }
         }
-    }*/
+        Debug.DrawLine(starTransforms[i - 1].position,Vector3.Lerp(starTransforms[i - 1].position, starTransforms[i].position, linePercent), Color.white);
+    }
 }

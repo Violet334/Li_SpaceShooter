@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         //velocity += speed * transform.up * Time.deltaTime;
         PlayerMovement();
         // transform.position += velocity.normalized * speed *Time.deltaTime;
-        Debug.Log(speed);
+        //Debug.Log(speed);
     }
 
     void PlayerMovement()
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
             accelerate = true;
             velocity += speed * Vector3.down * Time.deltaTime;
         }
-        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             accelerate = false;
         }
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
             accelerate = true;
             velocity += speed * Vector3.left * Time.deltaTime;
         }
-        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             accelerate = false;
         }
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
             accelerate = true;
             velocity += speed * Vector3.right * Time.deltaTime;
         }
-        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        else if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             accelerate = false;
         }
