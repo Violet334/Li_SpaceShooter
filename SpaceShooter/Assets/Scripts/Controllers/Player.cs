@@ -23,6 +23,14 @@ public class Player : MonoBehaviour
     private float accelerationTime = 3f;
     private bool accelerate;
 
+    //Week4 Task1
+    public float rad;
+    public int points;
+    //Task2
+    public float rad2;
+    public int points2;
+    public GameObject powerup;
+
     private void Start()
     {
         acceleration = targetSpeed / accelerationTime;
@@ -34,6 +42,10 @@ public class Player : MonoBehaviour
         PlayerMovement();
         // transform.position += velocity.normalized * speed *Time.deltaTime;
         //Debug.Log(speed);
+
+        //Week4 Task1
+        EnemyRadar(rad, points);
+        SpawnPowerups(rad2, points2);
     }
 
     void PlayerMovement()
@@ -95,5 +107,44 @@ public class Player : MonoBehaviour
         
     }
 
+    //Week4 Task1
+    public void EnemyRadar(float radius, int circlePoints)
+    { 
+        Color radarColor = Color.green;
+        if (Vector3.Distance(enemyTransform.position, transform.position) <= radius)
+        {
+            radarColor = Color.red;
+        }
 
+        List<float> angles = new List<float>();
+        float angleVal = 360 / circlePoints;
+        for(int i = 0; i <= circlePoints; i++)
+        {
+            float angleInc = angleVal * i;
+            angles.Add(angleInc);
+        }
+        for (int j = 0; j < angles.Count - 1; j++)
+        {
+            Vector3 startPoint = new Vector3(Mathf.Cos(angles[j] * Mathf.Deg2Rad), Mathf.Sin(angles[j] * Mathf.Deg2Rad)) * radius + transform.position;
+            Vector3 endPoint = new Vector3(Mathf.Cos(angles[j + 1] * Mathf.Deg2Rad), Mathf.Sin(angles[j + 1] * Mathf.Deg2Rad)) * radius + transform.position;
+            Debug.DrawLine(startPoint, endPoint, radarColor);
+        }
+
+    }
+    //Task2
+    void SpawnPowerups(float radius, int numberOfPowerups)
+    {
+        List<float> points = new List<float>();
+        float angles = 360 / numberOfPowerups;
+        for(int i = 0; i <= numberOfPowerups; i++)
+        {
+            float angleInc = angles * i;
+            points.Add(angleInc);
+        }
+        for(int j = 0; j < points.Count; j++)
+        {
+            Vector3 spawn = new Vector3(Mathf.Cos(points[j] * Mathf.Deg2Rad), Mathf.Sin(points[j] * Mathf.Deg2Rad)) * radius + transform.position;
+            Instantiate(powerup, spawn, Quaternion.identity);
+        }
+    }
 }
