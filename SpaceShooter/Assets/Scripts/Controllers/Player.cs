@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     private float accelerationTime = 3f;
     private bool accelerate;
 
+    //deceleration
+    public float decelerationTime;
+    float deceleration = 2;
+
     //Week4 Task1
     public float rad;
     public int points;
@@ -34,6 +38,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         acceleration = targetSpeed / accelerationTime;
+        deceleration = targetSpeed / decelerationTime;
     }
 
     void Update()
