@@ -7,6 +7,7 @@ public class Missile : MonoBehaviour
 {
     public Transform target;
     public float speed;
+    public float moveSpeed ;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,6 @@ public class Missile : MonoBehaviour
         float targetAngle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
 
         float deltaAngle = Mathf.DeltaAngle(currentAngle, targetAngle);
-        Debug.Log(deltaAngle);
         if (deltaAngle > 0)
         {
             transform.Rotate(0f, 0f, speed * Time.deltaTime);
@@ -41,13 +41,12 @@ public class Missile : MonoBehaviour
 
     void FollowPlayer()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
         Vector3 targetDir = target.position - transform.position;
-        if (distance > 0.3)
+        if (Vector3.Distance(transform.position, target.position) >= 0.3)
         {
-            transform.position += targetDir.normalized;
+            transform.position += targetDir.normalized * moveSpeed ;
         }
-        if(distance < 0.3)
+        if(Vector3.Distance(transform.position, target.position) < 0.3)
         {
             Destroy(gameObject);
         }

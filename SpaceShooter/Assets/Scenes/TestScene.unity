@@ -330,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1043062375}
   speed: 20
+  moveSpeed: 0.005
 --- !u!212 &1390315576
 SpriteRenderer:
   m_ObjectHideFlags: 0
