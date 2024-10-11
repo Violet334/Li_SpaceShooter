@@ -9,6 +9,11 @@ public class Player : MonoBehaviour
     public GameObject bombPrefab;
     public Transform bombsTransform;
 
+    //Final Space Shooter Assignment mechanic 2
+    public Transform stationaryAsteroid;
+    public float asteroidRadius;
+    float offset;
+
     //private Vector3 velocity = Vector3.right * 0.001f;
     //private float velocity = 0.01f;
     private Vector3 velocity = Vector3.zero;
@@ -34,11 +39,14 @@ public class Player : MonoBehaviour
     public float rad2;
     public int points2;
     public GameObject powerup;
+    int numOfPowerups = 0;
 
     private void Start()
     {
         acceleration = targetSpeed / accelerationTime;
         deceleration = targetSpeed / decelerationTime;
+
+        SpawnPowerups(rad2, points2);
     }
 
     void Update()
@@ -50,7 +58,6 @@ public class Player : MonoBehaviour
 
         //Week4 Task1
         EnemyRadar(rad, points);
-        SpawnPowerups(rad2, points2);
     }
 
     void PlayerMovement()
@@ -94,6 +101,13 @@ public class Player : MonoBehaviour
         {
             speed += acceleration * Time.deltaTime;
             transform.position += velocity.normalized * speed * Time.deltaTime;
+
+            //mechanic 2 - repelling field
+            Vector3 offset = transform.position - stationaryAsteroid.position;
+            if (Vector3.Distance(transform.position, stationaryAsteroid.position) < asteroidRadius)
+            {
+                transform.position += offset + velocity.normalized * speed * Time.deltaTime;
+            }
         }
         else
         {

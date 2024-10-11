@@ -7,6 +7,10 @@ public class Enemy : MonoBehaviour
     Vector2 distance;
     Vector3 velocity = Vector2.zero;
     float speed = 1f;
+
+    //Space Shooter mechanic 3
+    public GameObject bomb;
+    float timer = 0;
     private void Start()
     {
         distance = player.position - transform.position;
@@ -14,6 +18,14 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         EnemyMovement();
+
+        //The third final space shooter mechanic will be placed in update for ease of visibility
+        timer += Time.deltaTime;
+        if (timer >= 5)
+        {
+            Instantiate(bomb, transform.position, Quaternion.identity);
+            timer = 0;
+        }
     }
 
     void EnemyMovement()

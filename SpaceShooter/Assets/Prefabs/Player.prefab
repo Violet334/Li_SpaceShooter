@@ -129,4 +129,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d47aa4a8b38e97448c22dbfdc9e14da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HomingMissilePrefab: {fileID: 0}
+  asteroidTransforms: []
+  enemyTransform: {fileID: 4504276444959460, guid: e3900e4d87ee29c43ad1d9098b51432c, type: 3}
+  bombPrefab: {fileID: 1273894435109820, guid: b262926197932c945b68169dd6fd6c5c, type: 3}
+  bombsTransform: {fileID: 4049822235980678, guid: b262926197932c945b68169dd6fd6c5c, type: 3}
+  stationaryAsteroid: {fileID: 0}
+  asteroidRadius: 2
+  maxSpeed: 5
+  decelerationTime: 2
+  rad: 2
+  points: 8
+  rad2: 3
+  points2: 4
+  powerup: {fileID: 1567431237259788, guid: 03444c0c59102ba46bb1a8b5a1b0a810, type: 3}
