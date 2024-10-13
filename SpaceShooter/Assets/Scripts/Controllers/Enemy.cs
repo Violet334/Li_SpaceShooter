@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour
     Vector3 velocity = Vector2.zero;
     float speed = 1f;
 
+    //Space Shooter mechanic 1
+    public GameObject missile;
+
     //Space Shooter mechanic 3
     public GameObject bomb;
     float timer = 0;
@@ -24,6 +27,7 @@ public class Enemy : MonoBehaviour
         if (timer >= 5)
         {
             Instantiate(bomb, transform.position, Quaternion.identity);
+            Instantiate(missile, transform.position, Quaternion.identity);
             timer = 0;
         }
     }
